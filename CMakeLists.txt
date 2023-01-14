@@ -21,16 +21,6 @@
 # SOFTWARE.
 
 cmake_minimum_required(VERSION 3.18)
-if(MSVC)
-    message( STATUS "Added compiler options for MSVC" )
-    add_compile_options(/W4 /WALL /WX)
-elif(GNU)
-    message( STATUS "Added compiler options for GCC" )
-    add_compile_options(-Wall -Wconversion -Werror -Wextra -Wpedantic)
-else()
-    message(WARNING "Unable to detect compiler!")
-endif()
-
 
 set( CMAKE_CXX_STANDARD             17              )
 set( CMAKE_CXX_STANDARD_REQUIRED    True            )
@@ -50,7 +40,6 @@ endif()
 set( DPCGI_SHARED_LIB False CACHE BOOL "Build as shared/DLL library")
 set(BUILD_GMOCK False CACHE BOOL "Builds the googlemock subproject")
 set( DPCGI_SHARED_LIB_SPEC "STATIC" )
-
 if( ${DPCGI_SHARED_LIB} )
     set( DPCGI_SHARED_LIB_SPEC "SHARED" )
 endif()
@@ -60,8 +49,17 @@ function(group_target)
 endfunction()
 
 
-project(despair-cgi VERSION 1.0) ########################################################
-# set_property(GLOBAL PROPERTY USE_FOLDERS TRUE)
+project(despair-cgi VERSION 1.0 LANGUAGES C CXX) ########################################
+set_property(GLOBAL PROPERTY USE_FOLDERS TRUE)
+if(MSVC)
+    message( STATUS "Added compiler options for MSVC" )
+    add_compile_options(/nologo /W4 /WX)
+elseif(GNU)
+    message( STATUS "Added compiler options for GCC" )
+    add_compile_options(-Wall -Wconversion -Werror -Wextra -Wpedantic)
+else()
+    message(WARNING "Unable to detect compiler!")
+endif()
 
 
 message( CHECK_START "Configure Google Test" )

@@ -35,7 +35,3 @@ TEST(cookie, dummy) {
     EXPECT_EQ(FirstEntry->first, "username");
     EXPECT_EQ(FirstEntry->second, "kql2");
 }
-
-TEST(cookie, intentionally_fail) {
-    EXPECT_TRUE(false);
-}

@@ -21,8 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ****************************************************************************************/
-#ifndef DPCGI_PCH_HH
-#define DPCGI_PCH_HH
+#ifndef DESPAIR_CGI_DPCGI_PCH_HH
+#define DESPAIR_CGI_DPCGI_PCH_HH
 
 #include <algorithm>
 #include <ostream>
@@ -30,6 +30,12 @@ SOFTWARE.
 #include <string>
 #include <utility>
 #include <vector>
+
+#ifdef WIN32
+#include "dpcgi_windoze.inl"
+#else
+#include "dpcgi_pengu.inl"
+#endif
 
 #define DPCGI_NAMESPACE_BEGIN   namespace dpcgi {
 #define DPCGI_NAMESPACE_END     }    
@@ -43,4 +49,4 @@ SOFTWARE.
     auto ptr = this->_SUPER::find_attrib(AttrNameStr); \
     ptr->value = AttrVal;
 
-#endif // !DPCGI_PCH_HH
+#endif // !DESPAIR_CGI_DPCGI_PCH_HH
